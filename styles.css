@@ -4,16 +4,22 @@
 body{
     background-color: #20262d;
     font-family: 'Open Sans', sans-serif;
-    line-height: 1.2;
 }
 
 .navbar{
     margin-bottom: 20px;
 }
 
+.jumbotron{
+    border-radius: 0;
+}
+
+.btn-primary{
+    background-color: slateblue;
+}
+
 .panel{
-    background-color: white;
-    border-radius: 0.3em;
+    background-color: #e9ecef;
 }
 
 .panel-head{
