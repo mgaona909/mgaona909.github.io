@@ -2,29 +2,93 @@
 
 
 body{
-    background-color: #20262d;
+    background-color: #002832;
     font-family: 'Open Sans', sans-serif;
 }
 
 .navbar{
-    margin-bottom: 20px;
+    margin-bottom: 25px;
+}
+
+.bg-dark{
+    background-color: #1e6384!important;
+}
+
+.navbar-dark .navbar-nav .nav-link{
+    color: rgba(255,255,255,.7);
+    font-size: 1.2em;
+}
+
+.navbar-brand{
+    font-size: 1.8em;
+}
+
+.container{
+    width: 95vw;
+    height: 90vh;
 }
 
 .jumbotron{
     border-radius: 0;
 }
 
-.btn-primary{
-    background-color: slateblue;
+.btn-primary, .btn-primary:not(:disabled):not(.disabled).active, .btn-primary:not(:disabled):not(.disabled):active, .show>.btn-primary.dropdown-toggle{
+    background-color: #1e6384;
+    border-color: #e9ecef;
+    color: #e9ecef;
 }
+
+.btn-primary:hover{
+    background-color: #5494c1;
+    border-color: #e9ecef;
+    color: #e9ecef;
+}
+
 
 .panel{
     background-color: #e9ecef;
+    margin-bottom: 20px;
 }
 
 .panel-head{
-    background-color: slateblue;
-    padding: 5px;
+    background-color: #1e6384;
+    padding: 10px;
 }
 
+.panel-title{
+    color: #e9ecef;
+    font-size: 1.5em;
+    margin-bottom: 0;
+}
 
+.panel-body{
+    padding: 10px;;
+}
+
+#devicons{
+    margin-left: 15px
+}
+
+#fallback-text{
+    color: white;
+}
+
+.thumb{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    margin-bottom: 15px;
+}
+
+.thumbnail{
+    max-height: 100%;
+    max-width: 100%;
+    margin: auto;
+    display: block;
+}
+
+dd{
+    display: list-item;
+    list-style-type: disc;
+    margin: .2em 1.5em;
+}
