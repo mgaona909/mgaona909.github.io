@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Animation Project</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <script src="https://code.createjs.com/easeljs-0.8.2.min.js"></script> 
+        <script src="https://code.createjs.com/tweenjs-0.6.2.min.js"></script>
+        <script type="text/javascript">
+            /*global createjs*/
+            /*global Image*/
+            var canvas;
+            var stage;
+            var screen_width;
+            var screen_height;
+            var sprite;
+            var click;
+            var professor = new Image();
+
+            // Add support to EaselJS to control the speed the image moves across the canvas.
+            // Pixels per second the object will move along the x and y axis
+            createjs.DisplayObject.prototype.setPPS = function(x, y) {
+                this.vX = Math.round(x / createjs.Ticker.getFPS());
+                this.vY = Math.round(y / createjs.Ticker.getFPS());
+                this.ppmsX = x / 1000;
+                this.ppmsY = y / 1000;
+            };
+
+            // Calculate the time in milliseconds required to move from the current
+            // position to the specified point using the assigned velocity (pixels/second)    
+            createjs.DisplayObject.prototype.travelTime = function(x, y) {
+                var distX = Math.abs(x - this.x);
+                var distY = Math.abs(y - this.y);
+                var duration = Math.max(distX / this.ppmsX, distY / this.ppmsY);
+                return duration;
+            };
+
+            function init() {
+                canvas = document.getElementById("myCanvas");
+                canvas.addEventListener('click', function(e){
+                    click = getClickPos(canvas, e);
+                    console.log('Mouse Position: ' + click.x + ', ' + click.y);
+                }, false);
+                professor.onload = handleImageLoad;
+                professor.onerror = handleImageError;
+                professor.crossOrigin = "Anonymous";
+                professor.src = "professor.png";
+            }
+
+            function reset() {
+                stage.removeAllChildren();
+                stage.update();
+            }
+
+            function handleImageLoad(e) {
+                start();
+            }
+
+            function getClickPos(canvas, e){
+                var rect = canvas.getBoundingClientRect();
+                return{
+                    x: e.clientX - rect.left,
+                    y: e.clientY - rect.top
+                };
+            }
+
+            function start() {
+                // create a new stage and point it at our canvas:
+                stage = new createjs.Stage(canvas);
+                
+                // grab canvas width and height for later calculations:
+                screen_width = canvas.width;
+                screen_height = canvas.height;
+                
+
+                // create spritesheet and assign the associated data.
+                var spriteSheet = new createjs.SpriteSheet({
+                    images: [professor], 
+                    frames: {width: 64, height: 64, regX: 32, regY: 32}, 
+                    framerate: 60,
+                    animations: {	
+                        walk_u: [0, 8, "walk_u"],
+                        walk_l: [9, 17, "walk_l"],
+                        walk_d: [18, 26, "walk_d"],
+                        walk_r: [27, 35, "walk_r"],
+                        stand_u: [0],
+                        stand_l: [9],
+                        stand_d: [18],
+                        stand_r: [27]
+                    }
+                });
+                
+                // create a sprite instance to display and play back the sprite sheet:
+                sprite = new createjs.Sprite(spriteSheet);
+
+                // set the registration point (the point it will be positioned and rotated around)
+	            // to the center of the frame dimensions:
+	            sprite.regX = sprite.spriteSheet.frameWidth/2 | 0;
+                sprite.regY = sprite.spriteSheet.frameHeight/2 | 0;
+                sprite.x = screen_width/2;
+                sprite.y = screen_height/2;
+                sprite.direction = 'd';
+                sprite.setPPS(200, 200);
+                sprite.gotoAndStop('stand_d');
+
+                canvas.addEventListener('click', handleMouse);
+               
+                stage.addChild(sprite);
+                createjs.Ticker.setFPS(60);
+                createjs.Ticker.addEventListener("tick", stage);
+
+            }
+            
+            function handleMouse(event){
+                if(click){
+                    var speed = sprite.travelTime(click.x, click.y);
+                    createjs.Tween.get(sprite, {override: true})
+                        .call(function(){
+                                sprite.direction = click.x < sprite.x ? 'l' : 'r';
+                                sprite.gotoAndPlay('walk_'+sprite.direction);
+                            })
+                        .to({x: click.x}, speed)
+                        .call(function(){
+                            sprite.direction = click.y < sprite.y ? 'u' : 'd';
+                            sprite.gotoAndPlay('walk_'+sprite.direction);
+                        })
+                        .to({y: click.y}, speed)
+                        .call(function() { sprite.gotoAndStop('stand_' + sprite.direction); });
+                }
+            }
+
+
+            //called if there is an error loading the image (usually due to a 404)
+            function handleImageError(e) {
+                console.log("Error Loading Image : " + e.target.src);
+            }
+
+        </script>
+    </head>
+    <body>
+        <div>
+            <canvas id="myCanvas" height="500" width="500" style="background-color:#607559">
+                Your browser doesn't support canvas. Please download IE9+ on <a href="http://ie.microsoft.com/testdrive">IE Test Drive</a> 
+            </canvas>
+        </div>
+        <button id="Start" onclick="init();">Start</button>
+        <button id="Reset" onclick="reset();">Reset</button>
+    </body>
+</html>

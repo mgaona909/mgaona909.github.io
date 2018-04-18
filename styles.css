@@ -1,9 +1,15 @@
-@import url('https://fonts.googleapis.com/css?family=Open+Sans');
+/*******************************************************
 
+GENERAL SITE-WIDE STYLES
+
+*********************************************************/
+
+@import url('https://fonts.googleapis.com/css?family=Open+Sans');
 
 body{
     background-color: #002832;
     font-family: 'Open Sans', sans-serif;
+    font-size: 18px;
 }
 
 .navbar{
@@ -28,10 +34,6 @@ body{
     height: 90vh;
 }
 
-.jumbotron{
-    border-radius: 0;
-}
-
 .btn-primary, .btn-primary:not(:disabled):not(.disabled).active, .btn-primary:not(:disabled):not(.disabled):active, .show>.btn-primary.dropdown-toggle{
     background-color: #1e6384;
     border-color: #e9ecef;
@@ -44,6 +46,13 @@ body{
     color: #e9ecef;
 }
 
+a{
+    color: #1e6384;
+}
+
+a:hover{
+    color: #5494c1;;
+}
 
 .panel{
     background-color: #e9ecef;
@@ -65,13 +74,88 @@ body{
     padding: 10px;;
 }
 
+
+/*******************************************************
+
+HOME PAGE STYLES
+
+*********************************************************/
+
+.jumbotron{
+    border-radius: 0;
+}
+
+.jumbotron h1{
+    font-size: 3.5em;
+}
+
 #devicons{
     margin-left: 15px
 }
 
-#fallback-text{
-    color: white;
+dd{
+    display: list-item;
+    list-style-type: disc;
+    margin: .2em 1.5em;
 }
+
+
+/*******************************************************
+
+RESUME PAGE STYLES
+
+*********************************************************/
+
+
+#fallback-text{
+    color: #e9ecef;
+    text-align: center;
+    
+}
+
+#resume-row{
+    height: 100vh;
+}
+
+#resume-col{
+    text-align: center;
+}
+
+iframe{
+    width: 75%;
+    height: 100%;
+}
+
+@media screen and (max-width:991px){
+    #resume-row{
+        height: 100vh;
+    }
+    
+    iframe{
+        width: 100%;
+    }
+}
+
+@media screen and (max-width:767px){
+    #resume-row{
+        height: 78vh;
+    }
+}
+
+@media screen and (max-width:466px){
+    #resume-row{
+        height: 50vh;
+    }
+}
+
+
+
+
+/*******************************************************
+
+PROJECT PAGE STYLES
+
+*********************************************************/
 
 .thumb{
     display:flex;
@@ -87,8 +171,4 @@ body{
     display: block;
 }
 
-dd{
-    display: list-item;
-    list-style-type: disc;
-    margin: .2em 1.5em;
-}
+
