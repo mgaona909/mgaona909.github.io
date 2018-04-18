@@ -165,10 +165,8 @@ PROJECT PAGE STYLES
 }
 
 .thumbnail{
-    max-height: 100%;
+    width: 400px;
     max-width: 100%;
-    margin: auto;
-    display: block;
 }
 
 
