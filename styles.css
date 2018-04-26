@@ -22,11 +22,10 @@ body{
 
 .navbar-dark .navbar-nav .nav-link{
     color: rgba(255,255,255,.7);
-    font-size: 1.2em;
 }
 
 .navbar-brand{
-    font-size: 1.8em;
+    font-size: 1em;
 }
 
 .container{
