@@ -4,7 +4,6 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta http-equiv="X-Frame-Options" content="allow">
     <link rel="apple-touch-icon" sizes="57x57" href="/apple-icon-57x57.png">
     <link rel="apple-touch-icon" sizes="60x60" href="/apple-icon-60x60.png">
     <link rel="apple-touch-icon" sizes="72x72" href="/apple-icon-72x72.png">
@@ -49,14 +48,16 @@
     
     <div class="container">
       
-      <!--<object data="/miguel_gaona_resume.pdf" type="application/pdf" width="100%" height="100%">-->
-      <!--    <p id="fallback-text">This browser does not support embedded PDFs. Please download the PDF to view it: <a href="/miguel_gaona_resume.pdf">Download PDF</a></p>-->
-      <!--</object>-->
-      
-      
       <div class="row" id="resume-row">
         <div class="col-md-12" id="resume-col">
-          <iframe src="https://drive.google.com/file/d/1VWAbd0nZa9KlocM6NTw_Lw6s_wsoIpBj/preview"></iframe>
+          
+          <object id="fallback-pdf" data="/miguel_gaona_resume.pdf" type="application/pdf" width="100%" height="100%" style="display:none">
+              <p id="fallback-text">
+                This browser does not support embedded PDFs.<br/>Please download the PDF to view it: <a href="/miguel_gaona_resume.pdf">Download PDF</a>
+              </p>
+          </object>
+          
+          <iframe id="gdrive-pdf" src="https://drive.google.com/file/d/1VWAbd0nZa9KlocM6NTw_Lw6s_wsoIpBj/preview"></iframe>
         </div>
       </div>
       
@@ -66,5 +67,14 @@
     <!-- jQuery and Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
+    <script type="text/javascript">
+        var isIE = /*@cc_on!@*/false || !!document.documentMode;
+        
+        if (isIE){
+          document.getElementById('gdrive-pdf').style.display = 'none';
+          document.getElementById('fallback-pdf').style.display = 'block';
+        }
+        
+      </script>
   </body>
 </html>
